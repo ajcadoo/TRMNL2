@@ -124,14 +124,25 @@ export default async function handler(req, res) {
       const minutesStr = minutes < 10 ? "0" + minutes : minutes;
       return `${hours}:${minutesStr}${ampm}`;
     }
+    
+    // New helper: Format time in Central Time (America/Chicago)
+    function formatCentralTime(date) {
+      return date.toLocaleTimeString('en-US', {
+        timeZone: 'America/Chicago',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
+    }
+    
     let calmPeriodText = "--";
     if (calmStart !== null) {
       const calmDate = new Date((calmStart + data.timezone_offset) * 1000);
       calmPeriodText = formatTime(calmDate);
     }
 
-    // Current update time (for informational purposes)
-    const updatedAt = formatTime(new Date());
+    // Updated "updatedAt" in Central Time using the new formatCentralTime helper
+    const updatedAt = formatCentralTime(new Date());
 
     // --- Build the JSON Response ---
     const output = {
