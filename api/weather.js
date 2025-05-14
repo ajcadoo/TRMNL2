@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       if (temp >= 75 && temp <= 85) return 5;
       else if ((temp >= 70 && temp < 75) || (temp > 85 && temp <= 90)) return 4;
       else if ((temp >= 65 && temp < 70) || (temp > 90 && temp <= 95)) return 3;
-      else if ((temp >= 60 && temp < 65) || (temp > 95 && temp <= 100)) return 2;
+      else if ((temp >= 60 && temp < 65) || (temp > 95)) return 2;
       return 1;
     }
     function getWindScore(windBFT) {
